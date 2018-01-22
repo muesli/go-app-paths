@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestDirs(t *testing.T) {
+func TestPaths(t *testing.T) {
 	tests := []struct {
 		scopeType  ScopeType
 		app        string
