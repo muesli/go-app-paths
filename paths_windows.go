@@ -4,20 +4,19 @@ package apppaths
 
 import (
 	"path/filepath"
+	"sync"
 	"syscall"
 	"unsafe"
 )
 
-var (
-	shell32, _            = syscall.LoadLibrary("shell32.dll")
-	getKnownFolderPath, _ = syscall.GetProcAddress(shell32, "SHGetKnownFolderPath")
-
-	ole32, _         = syscall.LoadLibrary("Ole32.dll")
-	coTaskMemFree, _ = syscall.GetProcAddress(ole32, "CoTaskMemFree")
-)
-
 // These are KNOWNFOLDERID constants that are passed to GetKnownFolderPath
 var (
+	initOnce  sync.Once
+	initError error
+
+	getKnownFolderPath uintptr
+	coTaskMemFree      uintptr
+
 	rfidLocalAppData = syscall.GUID{
 		0xf1b32785,
 		0x6fba,
@@ -101,6 +100,11 @@ func (s *Scope) logPath() (string, error) {
 }
 
 func getFolderPath(rfid syscall.GUID) (string, error) {
+	initOnce.Do(initDLL)
+	if initError != nil {
+		return "", initError
+	}
+
 	var res uintptr
 	ret, _, callErr := syscall.Syscall6(
 		uintptr(getKnownFolderPath),
@@ -112,7 +116,6 @@ func getFolderPath(rfid syscall.GUID) (string, error) {
 		0,
 		0,
 	)
-
 	if callErr != 0 && ret != 0 {
 		return "", callErr
 	}
@@ -124,4 +127,28 @@ func getFolderPath(rfid syscall.GUID) (string, error) {
 func ucs2PtrToString(p uintptr) string {
 	ptr := (*[4096]uint16)(unsafe.Pointer(p))
 	return syscall.UTF16ToString((*ptr)[:])
+}
+
+func initDLL() {
+	shell32, err := syscall.LoadLibrary("shell32.dll")
+	if err != nil {
+		initError = err
+		return
+	}
+	getKnownFolderPath, err = syscall.GetProcAddress(shell32, "SHGetKnownFolderPath")
+	if err != nil {
+		initError = err
+		return
+	}
+
+	ole32, err := syscall.LoadLibrary("Ole32.dll")
+	if err != nil {
+		initError = err
+		return
+	}
+	coTaskMemFree, err = syscall.GetProcAddress(ole32, "CoTaskMemFree")
+	if err != nil {
+		initError = err
+		return
+	}
 }
