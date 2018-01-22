@@ -5,7 +5,8 @@ Lets you retrieve platform-specific paths (like directories for app-data, cache,
 
 ## Installation
 
-Make sure you have a working Go environment. See the [install instructions](http://golang.org/doc/install.html).
+Make sure you have a working Go environment (Go 1.2 or higher is required).
+See the [install instructions](http://golang.org/doc/install.html).
 
 To install go-app-paths, simply run:
 
