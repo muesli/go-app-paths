@@ -1,6 +1,6 @@
 // +build darwin
 
-package dirs
+package apppaths
 
 // dataDir returns the full path to the data directory.
 func (s *Scope) dataDir() (string, error) {

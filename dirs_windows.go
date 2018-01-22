@@ -1,6 +1,6 @@
 // +build windows
 
-package dirs
+package apppaths
 
 import (
 	"path/filepath"

@@ -1,4 +1,4 @@
-package dirs
+package apppaths
 
 import (
 	"errors"

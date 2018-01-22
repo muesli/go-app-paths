@@ -1,6 +1,6 @@
 // +build !darwin,!windows
 
-package dirs
+package apppaths
 
 import (
 	"os"
