@@ -67,7 +67,7 @@ func (s *Scope) dataDir() (string, error) {
 		return "", ErrRetrievingPath
 	}
 
-	return path, nil
+	return filepath.Join(path, s.App), nil
 }
 
 // cacheDir returns the full path to the cache directory.
@@ -77,7 +77,7 @@ func (s *Scope) cacheDir() (string, error) {
 		return p, err
 	}
 
-	return filepath.Join(p, s.App, "Cache"), nil
+	return filepath.Join(p, "Cache"), nil
 }
 
 // configPath returns the full path to the config dir.
@@ -87,7 +87,7 @@ func (s *Scope) configPath() (string, error) {
 		return p, err
 	}
 
-	return filepath.Join(p, s.App, "Config"), nil
+	return filepath.Join(p, "Config"), nil
 }
 
 // logPath returns the full path to the log dir.
@@ -97,7 +97,7 @@ func (s *Scope) logPath() (string, error) {
 		return p, err
 	}
 
-	return filepath.Join(p, s.App, "Logs"), nil
+	return filepath.Join(p, "Logs"), nil
 }
 
 func getFolderPath(rfid syscall.GUID) (string, error) {
