@@ -62,7 +62,7 @@ func (s *Scope) CacheDir() (string, error) {
 
 // ConfigPath returns the full path to the application's config file.
 func (s *Scope) ConfigPath(filename string) (string, error) {
-	p, err := s.configPath()
+	p, err := s.configDir()
 	if err != nil {
 		return p, err
 	}
@@ -72,7 +72,7 @@ func (s *Scope) ConfigPath(filename string) (string, error) {
 
 // LogPath returns the full path to the application's log file.
 func (s *Scope) LogPath(filename string) (string, error) {
-	p, err := s.logPath()
+	p, err := s.logDir()
 	if err != nil {
 		return p, err
 	}

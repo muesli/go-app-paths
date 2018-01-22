@@ -37,8 +37,8 @@ func (s *Scope) cacheDir() (string, error) {
 	return "", ErrInvalidScope
 }
 
-// configPath returns the full path to the config dir.
-func (s *Scope) configPath() (string, error) {
+// configDir returns the full path to the config dir.
+func (s *Scope) configDir() (string, error) {
 	def := "/Library/Preferences"
 	switch s.Type {
 	case System:
@@ -50,8 +50,8 @@ func (s *Scope) configPath() (string, error) {
 	return "", ErrInvalidScope
 }
 
-// logPath returns the full path to the log dir.
-func (s *Scope) logPath() (string, error) {
+// logDir returns the full path to the log dir.
+func (s *Scope) logDir() (string, error) {
 	def := "/Library/Logs"
 	switch s.Type {
 	case System:

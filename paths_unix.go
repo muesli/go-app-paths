@@ -46,8 +46,8 @@ func (s *Scope) cacheDir() (string, error) {
 	return "", ErrInvalidScope
 }
 
-// configPath returns the full path to the config dir.
-func (s *Scope) configPath() (string, error) {
+// configDir returns the full path to the config dir.
+func (s *Scope) configDir() (string, error) {
 	switch s.Type {
 	case System:
 		return "/etc", nil
@@ -62,8 +62,8 @@ func (s *Scope) configPath() (string, error) {
 	return "", ErrInvalidScope
 }
 
-// logPath returns the full path to the log dir.
-func (s *Scope) logPath() (string, error) {
+// logDir returns the full path to the log dir.
+func (s *Scope) logDir() (string, error) {
 	switch s.Type {
 	case System:
 		return "/var/log", nil
