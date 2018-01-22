@@ -1,0 +1,23 @@
+version: "{build}"
+
+os: Windows Server 2012 R2
+
+clone_folder: c:\gopath\src\github.com\muesli\go-app-paths
+
+environment:
+  GOPATH: c:\gopath
+
+install:
+    - echo %PATH%
+    - echo %GOPATH%
+    - go version
+    - go env
+    - ps: |
+        go.exe get -t -d (go.exe list ./... `
+        |? { -not $_.Contains('/vendor/') })
+
+build_script:
+    - ps: |
+        go.exe test -v -cpu=2 (go.exe list ./... `
+        |? { -not $_.Contains('/vendor/') })
+    - go build
