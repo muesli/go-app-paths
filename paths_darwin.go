@@ -2,6 +2,15 @@
 
 package apppaths
 
+import "path/filepath"
+
+// appendPaths appends the app-name and further variadic parts to a path
+func (s *Scope) appendPaths(path string, parts ...string) string {
+	paths := []string{path, s.App}
+	paths = append(paths, parts...)
+	return filepath.Join(paths...)
+}
+
 // dataDir returns the full path to the data directory.
 func (s *Scope) dataDir() (string, error) {
 	def := "/Library/Application Support"

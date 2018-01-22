@@ -3,7 +3,6 @@ package apppaths
 import (
 	"errors"
 	"os/user"
-	"path/filepath"
 	"strings"
 )
 
@@ -79,13 +78,6 @@ func (s *Scope) LogPath(filename string) (string, error) {
 	}
 
 	return s.appendPaths(p, filename), nil
-}
-
-// appendPaths appends the app-name and further variadic parts to a path
-func (s *Scope) appendPaths(path string, parts ...string) string {
-	paths := []string{path, s.App}
-	paths = append(paths, parts...)
-	return filepath.Join(paths...)
 }
 
 // expandUser is a helper function that expands the first '~' it finds in the
