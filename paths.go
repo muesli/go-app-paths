@@ -9,7 +9,8 @@ import (
 
 var (
 	// ErrInvalidScope gets returned when an invalid scope type has been set.
-	ErrInvalidScope   = errors.New("Invalid scope type")
+	ErrInvalidScope = errors.New("Invalid scope type")
+	// ErrRetrievingPath gets returned when the path could not be resolved.
 	ErrRetrievingPath = errors.New("Could not retrieve path")
 )
 
