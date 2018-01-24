@@ -15,8 +15,8 @@ func TestPaths(t *testing.T) {
 		configFile string
 		logFile    string
 	}{
-		{System, "foobar", "/Library/Application Support/foobar", "/Library/Cache/foobar", "/Library/Preferences/foobar/foobar.conf", "/Library/Logs/foobar/foobar.log"},
-		{User, "foobar", "~/Library/Application Support/foobar", "~/Library/Cache/foobar", "~/Library/Preferences/foobar/foobar.conf", "~/Library/Logs/foobar/foobar.log"},
+		{System, "foobar", "/Library/Application Support/foobar", "/Library/Caches/foobar", "/Library/Preferences/foobar/foobar.conf", "/Library/Logs/foobar/foobar.log"},
+		{User, "foobar", "~/Library/Application Support/foobar", "~/Library/Caches/foobar", "~/Library/Preferences/foobar/foobar.conf", "~/Library/Logs/foobar/foobar.log"},
 	}
 	for _, tt := range tests {
 		s := NewScope(tt.scopeType, "", tt.app)
