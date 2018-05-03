@@ -22,13 +22,16 @@ const (
 	System ScopeType = iota
 	// User is the user-specific scope.
 	User
+	// CustomHome uses a custom user home as scope.
+	CustomHome
 )
 
 // Scope holds scope & app-specific information.
 type Scope struct {
-	Type   ScopeType
-	Vendor string
-	App    string
+	Type       ScopeType
+	CustomHome string
+	Vendor     string
+	App        string
 }
 
 // NewScope returns a new Scope that lets you query app- & platform-specific
@@ -38,6 +41,17 @@ func NewScope(t ScopeType, vendor, app string) *Scope {
 		Type:   t,
 		Vendor: vendor,
 		App:    app,
+	}
+}
+
+// NewCustomHomeScope returns a new Scope that lets you operate on a custom path
+// prefix.
+func NewCustomHomeScope(path, vendor, app string) *Scope {
+	return &Scope{
+		Type:       CustomHome,
+		CustomHome: path,
+		Vendor:     vendor,
+		App:        app,
 	}
 }
 

@@ -19,6 +19,8 @@ func (s *Scope) dataDir() (string, error) {
 		return def, nil
 	case User:
 		return expandUser("~" + def), nil
+	case CustomHome:
+		return filepath.Join(s.CustomPath, def), nil
 	}
 
 	return "", ErrInvalidScope
@@ -32,6 +34,8 @@ func (s *Scope) cacheDir() (string, error) {
 		return def, nil
 	case User:
 		return expandUser("~" + def), nil
+	case CustomHome:
+		return filepath.Join(s.CustomPath, def), nil
 	}
 
 	return "", ErrInvalidScope
@@ -45,6 +49,8 @@ func (s *Scope) configDir() (string, error) {
 		return def, nil
 	case User:
 		return expandUser("~" + def), nil
+	case CustomHome:
+		return filepath.Join(s.CustomPath, def), nil
 	}
 
 	return "", ErrInvalidScope
@@ -58,6 +64,8 @@ func (s *Scope) logDir() (string, error) {
 		return def, nil
 	case User:
 		return expandUser("~" + def), nil
+	case CustomHome:
+		return filepath.Join(s.CustomPath, def), nil
 	}
 
 	return "", ErrInvalidScope

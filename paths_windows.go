@@ -53,6 +53,8 @@ func (s *Scope) dataDir() (string, error) {
 		rfid = rfidProgramData
 	case User:
 		rfid = rfidLocalAppData
+	case CustomHome:
+		return s.CustomPath, nil
 	default:
 		return "", ErrInvalidScope
 	}
