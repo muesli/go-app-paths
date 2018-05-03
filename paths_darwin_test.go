@@ -16,7 +16,7 @@ func TestPaths(t *testing.T) {
 	}{
 		{NewScope(System, "", "foobar"), "/Library/Application Support/foobar", "/Library/Caches/foobar", "/Library/Preferences/foobar/foobar.conf", "/Library/Logs/foobar/foobar.log"},
 		{NewScope(User, "", "foobar"), "~/Library/Application Support/foobar", "~/Library/Caches/foobar", "~/Library/Preferences/foobar/foobar.conf", "~/Library/Logs/foobar/foobar.log"},
-		{NewCustomHomeScope("/tmp", "", "foobar"), "~/Library/Application Support/foobar", "~/Library/Caches/foobar", "~/Library/Preferences/foobar/foobar.conf", "~/Library/Logs/foobar/foobar.log"},
+		{NewCustomHomeScope("/tmp", "", "foobar"), "/tmp/Library/Application Support/foobar", "/tmp/Library/Caches/foobar", "/tmp/Library/Preferences/foobar/foobar.conf", "/tmp/Library/Logs/foobar/foobar.log"},
 	}
 	for _, tt := range tests {
 		path, err := tt.scope.DataDir()
