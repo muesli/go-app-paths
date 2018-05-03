@@ -8,20 +8,18 @@ import (
 
 func TestPaths(t *testing.T) {
 	tests := []struct {
-		scopeType  ScopeType
-		app        string
+		scope      *Scope
 		dataDir    string
 		cacheDir   string
 		configFile string
 		logFile    string
 	}{
-		{System, "foobar", "/Library/Application Support/foobar", "/Library/Caches/foobar", "/Library/Preferences/foobar/foobar.conf", "/Library/Logs/foobar/foobar.log"},
-		{User, "foobar", "~/Library/Application Support/foobar", "~/Library/Caches/foobar", "~/Library/Preferences/foobar/foobar.conf", "~/Library/Logs/foobar/foobar.log"},
+		{NewScope(System, "", "foobar"), "/Library/Application Support/foobar", "/Library/Caches/foobar", "/Library/Preferences/foobar/foobar.conf", "/Library/Logs/foobar/foobar.log"},
+		{NewScope(User, "", "foobar"), "~/Library/Application Support/foobar", "~/Library/Caches/foobar", "~/Library/Preferences/foobar/foobar.conf", "~/Library/Logs/foobar/foobar.log"},
+		{NewCustomHomeScope("/tmp", "", "foobar"), "~/Library/Application Support/foobar", "~/Library/Caches/foobar", "~/Library/Preferences/foobar/foobar.conf", "~/Library/Logs/foobar/foobar.log"},
 	}
 	for _, tt := range tests {
-		s := NewScope(tt.scopeType, "", tt.app)
-
-		path, err := s.DataDir()
+		path, err := tt.scope.DataDir()
 		if err != nil {
 			t.Errorf("Error retrieving data dir: %s", err)
 		}
@@ -29,7 +27,7 @@ func TestPaths(t *testing.T) {
 			t.Errorf("Expected data dir: %s - got: %s", tt.dataDir, path)
 		}
 
-		path, err = s.CacheDir()
+		path, err = tt.scope.CacheDir()
 		if err != nil {
 			t.Errorf("Error retrieving cache dir: %s", err)
 		}
@@ -37,7 +35,7 @@ func TestPaths(t *testing.T) {
 			t.Errorf("Expected cache dir: %s - got: %s", tt.cacheDir, path)
 		}
 
-		path, err = s.ConfigPath(tt.app + ".conf")
+		path, err = tt.scope.ConfigPath(tt.scope.App + ".conf")
 		if err != nil {
 			t.Errorf("Error retrieving config path: %s", err)
 		}
@@ -45,7 +43,7 @@ func TestPaths(t *testing.T) {
 			t.Errorf("Expected config path: %s - got: %s", tt.configFile, path)
 		}
 
-		path, err = s.LogPath(tt.app + ".log")
+		path, err = tt.scope.LogPath(tt.scope.App + ".log")
 		if err != nil {
 			t.Errorf("Error retrieving log path: %s", err)
 		}
