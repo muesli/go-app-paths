@@ -15,7 +15,7 @@ func TestPaths(t *testing.T) {
 		logFile    string
 	}{
 		{NewScope(System, "", "foobar"), "C:\\ProgramData\\foobar", "C:\\ProgramData\\foobar\\Cache", "C:\\ProgramData\\foobar\\Config\\foobar.conf", "C:\\ProgramData\\foobar\\Logs\\foobar.log"},
-		{NewScope(User, "", "foobar"), "C:\\Users\\appveyor\\AppData\\Local\\foobar", "C:\\Users\\appveyor\\AppData\\Local\\foobar\\Cache", "C:\\Users\\appveyor\\AppData\\Local\\foobar\\Config\\foobar.conf", "C:\\Users\\appveyor\\AppData\\Local\\foobar\\Logs\\foobar.log"},
+		{NewScope(User, "", "foobar"), "C:\\Users\\runneradmin\\AppData\\Local\\foobar", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Cache", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Config\\foobar.conf", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Logs\\foobar.log"},
 		{NewCustomHomeScope("C:\\tmp", "", "foobar"), "C:\\tmp", "C:\\tmp\\Cache", "C:\\tmp\\Config\\foobar.conf", "C:\\tmp\\Logs\\foobar.log"},
 	}
 	for _, tt := range tests {
