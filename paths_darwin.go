@@ -1,6 +1,6 @@
 // +build darwin
 
-package apppaths
+package gap
 
 import "path/filepath"
 

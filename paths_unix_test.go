@@ -1,6 +1,6 @@
 // +build !darwin,!windows
 
-package apppaths
+package gap
 
 import (
 	"testing"

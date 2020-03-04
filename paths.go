@@ -1,4 +1,4 @@
-package apppaths
+package gap
 
 import (
 	"errors"

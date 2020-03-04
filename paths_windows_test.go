@@ -1,6 +1,6 @@
 // +build windows
 
-package apppaths
+package gap
 
 import (
 	"testing"
