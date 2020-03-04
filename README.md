@@ -7,8 +7,8 @@
 [![Go ReportCard](http://goreportcard.com/badge/muesli/go-app-paths)](http://goreportcard.com/report/muesli/go-app-paths)
 
 Lets you retrieve platform-specific paths (like directories for app-data, cache,
-config, and logs). Follows the XDG Base Directory Specification on Unix systems,
-but also provides implementations for macOS and Windows systems.
+config, and logs). Follows the XDG Base Directory Specification on Unix, but
+also provides implementations for macOS and Windows systems.
 
 ## Installation
 
