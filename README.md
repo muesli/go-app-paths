@@ -1,6 +1,12 @@
 go-app-paths
 ============
 
+[![Latest Release](https://img.shields.io/github/release/muesli/go-app-paths.svg)](https://github.com/muesli/go-app-paths/releases)
+[![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://pkg.go.dev/github.com/muesli/go-app-paths?tab=doc)
+[![Build Status](https://github.com/muesli/go-app-paths/workflows/build/badge.svg)](https://github.com/muesli/go-app-paths/actions)
+[![Coverage Status](https://coveralls.io/repos/github/muesli/go-app-paths/badge.svg?branch=master)](https://coveralls.io/github/muesli/go-app-paths?branch=master)
+[![Go ReportCard](http://goreportcard.com/badge/muesli/go-app-paths)](http://goreportcard.com/report/muesli/go-app-paths)
+
 Lets you retrieve platform-specific paths (like directories for app-data, cache, config, and logs)
 
 ## Installation
@@ -42,6 +48,7 @@ To compile it from source:
 | Log Path    | %LOCALAPPDATA%/appname/Logs/filename   | %PROGRAMDATA%/appname/Logs/filename   |
 
 ## Example
+
 ```go
 package main
 
@@ -63,11 +70,3 @@ func main() {
 	systemScope.LogPath("filename.log")     // => /var/log/appname/filename.log
 }
 ```
-
-## Development
-
-API docs can be found [here](http://godoc.org/github.com/muesli/go-app-paths).
-
-[![Build Status](https://travis-ci.org/muesli/go-app-paths.svg?branch=master)](https://travis-ci.org/muesli/go-app-paths)
-[![Coverage Status](https://coveralls.io/repos/github/muesli/go-app-paths/badge.svg?branch=master)](https://coveralls.io/github/muesli/go-app-paths?branch=master)
-[![Go ReportCard](http://goreportcard.com/badge/muesli/go-app-paths)](http://goreportcard.com/report/muesli/go-app-paths)
