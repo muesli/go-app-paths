@@ -1,5 +1,4 @@
-go-app-paths
-============
+# go-app-paths
 
 [![Latest Release](https://img.shields.io/github/release/muesli/go-app-paths.svg)](https://github.com/muesli/go-app-paths/releases)
 [![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://pkg.go.dev/github.com/muesli/go-app-paths?tab=doc)
@@ -7,7 +6,9 @@ go-app-paths
 [![Coverage Status](https://coveralls.io/repos/github/muesli/go-app-paths/badge.svg?branch=master)](https://coveralls.io/github/muesli/go-app-paths?branch=master)
 [![Go ReportCard](http://goreportcard.com/badge/muesli/go-app-paths)](http://goreportcard.com/report/muesli/go-app-paths)
 
-Lets you retrieve platform-specific paths (like directories for app-data, cache, config, and logs)
+Lets you retrieve platform-specific paths (like directories for app-data, cache,
+config, and logs). Follows the XDG Base Directory Specification on Unix systems,
+but also provides implementations for macOS and Windows systems.
 
 ## Installation
 
