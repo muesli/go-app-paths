@@ -53,17 +53,17 @@ To compile it from source:
 package main
 
 import (
-	"github.com/muesli/go-app-paths"
+	gap "github.com/muesli/go-app-paths"
 )
 
 func main() {
-	userScope := apppaths.NewScope(apppaths.User, "vendorname", "appname")
+	userScope := gap.NewScope(gap.User, "vendorname", "appname")
 	userScope.DataDir()                   // => ~/.local/share/appname
 	userScope.CacheDir()                  // => ~/.cache/appname
 	userScope.ConfigPath("filename.conf") // => ~/.config/appname/filename.conf
 	userScope.LogPath("filename.log")     // => ~/.local/share/appname/filename.log
 
-	systemScope := apppaths.NewScope(apppaths.System, "vendorname", "appname")
+	systemScope := gap.NewScope(gap.System, "vendorname", "appname")
 	systemScope.DataDir()                   // => /usr/share/appname
 	systemScope.CacheDir()                  // => /var/cache/appname
 	systemScope.ConfigPath("filename.conf") // => /etc/appname/filename.conf
