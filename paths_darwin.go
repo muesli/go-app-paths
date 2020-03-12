@@ -14,11 +14,14 @@ func (s *Scope) appendPaths(path string, parts ...string) string {
 // dataDir returns the full path to the data directory.
 func (s *Scope) dataDir() (string, error) {
 	def := "/Library/Application Support"
+
 	switch s.Type {
 	case System:
 		return def, nil
+
 	case User:
 		return expandUser("~" + def), nil
+
 	case CustomHome:
 		return filepath.Join(s.CustomHome, def), nil
 	}
@@ -29,11 +32,14 @@ func (s *Scope) dataDir() (string, error) {
 // cacheDir returns the full path to the cache directory.
 func (s *Scope) cacheDir() (string, error) {
 	def := "/Library/Caches"
+
 	switch s.Type {
 	case System:
 		return def, nil
+
 	case User:
 		return expandUser("~" + def), nil
+
 	case CustomHome:
 		return filepath.Join(s.CustomHome, def), nil
 	}
@@ -44,11 +50,14 @@ func (s *Scope) cacheDir() (string, error) {
 // configDir returns the full path to the config dir.
 func (s *Scope) configDir() (string, error) {
 	def := "/Library/Preferences"
+
 	switch s.Type {
 	case System:
 		return def, nil
+
 	case User:
 		return expandUser("~" + def), nil
+
 	case CustomHome:
 		return filepath.Join(s.CustomHome, def), nil
 	}
@@ -59,11 +68,14 @@ func (s *Scope) configDir() (string, error) {
 // logDir returns the full path to the log dir.
 func (s *Scope) logDir() (string, error) {
 	def := "/Library/Logs"
+
 	switch s.Type {
 	case System:
 		return def, nil
+
 	case User:
 		return expandUser("~" + def), nil
+
 	case CustomHome:
 		return filepath.Join(s.CustomHome, def), nil
 	}
