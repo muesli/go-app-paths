@@ -36,7 +36,16 @@ type Scope struct {
 
 // NewScope returns a new Scope that lets you query app- & platform-specific
 // paths.
-func NewScope(t ScopeType, vendor, app string) *Scope {
+func NewScope(t ScopeType, app string) *Scope {
+	return &Scope{
+		Type: t,
+		App:  app,
+	}
+}
+
+// NewVendorScope returns a new Scope with vendor information that lets you
+// query app- & platform-specific paths.
+func NewVendorScope(t ScopeType, vendor, app string) *Scope {
 	return &Scope{
 		Type:   t,
 		Vendor: vendor,
