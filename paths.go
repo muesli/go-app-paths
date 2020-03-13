@@ -2,6 +2,7 @@ package gap
 
 import (
 	"errors"
+	"os"
 	"strings"
 
 	homedir "github.com/mitchellh/go-homedir"
@@ -93,7 +94,7 @@ func (s *Scope) ConfigDirs() ([]string, error) {
 	return sl, nil
 }
 
-// CacheDir returns the full path to the application's cache dir.
+// CacheDir returns the full path to the application's default cache dir.
 func (s *Scope) CacheDir() (string, error) {
 	p, err := s.cacheDir()
 	if err != nil {
@@ -103,17 +104,7 @@ func (s *Scope) CacheDir() (string, error) {
 	return s.appendPaths(p), nil
 }
 
-// ConfigPath returns the full path to the application's config file.
-func (s *Scope) ConfigPath(filename string) (string, error) {
-	p, err := s.configDir()
-	if err != nil {
-		return p, err
-	}
-
-	return s.appendPaths(p, filename), nil
-}
-
-// LogPath returns the full path to the application's log file.
+// LogPath returns the full path to the application's default log file.
 func (s *Scope) LogPath(filename string) (string, error) {
 	p, err := s.logDir()
 	if err != nil {
@@ -123,6 +114,48 @@ func (s *Scope) LogPath(filename string) (string, error) {
 	return s.appendPaths(p, filename), nil
 }
 
+// DataPath returns the full path to a file in the application's default data
+// directory.
+func (s *Scope) DataPath(filename string) (string, error) {
+	p, err := s.dataDir()
+	if err != nil {
+		return p, err
+	}
+
+	return s.appendPaths(p, filename), nil
+}
+
+// ConfigPath returns the full path to a file in the application's default
+// config directory.
+func (s *Scope) ConfigPath(filename string) (string, error) {
+	p, err := s.configDir()
+	if err != nil {
+		return p, err
+	}
+
+	return s.appendPaths(p, filename), nil
+}
+
+// LookupConfig returns all existing configs with this filename.
+func (s *Scope) LookupConfig(filename string) ([]string, error) {
+	paths, err := s.configDirs()
+	if err != nil {
+		return nil, err
+	}
+
+	return s.findExisting(paths, filename), nil
+}
+
+// LookupDataFile returns all existing data files with this filename.
+func (s *Scope) LookupDataFile(filename string) ([]string, error) {
+	paths, err := s.dataDirs()
+	if err != nil {
+		return nil, err
+	}
+
+	return s.findExisting(paths, filename), nil
+}
+
 // expandUser is a helper function that expands the first '~' it finds in the
 // passed path with the home directory of the current user.
 func expandUser(path string) string {
@@ -130,4 +163,20 @@ func expandUser(path string) string {
 		return strings.Replace(path, "~", u, -1)
 	}
 	return path
+}
+
+// findExisting tries to find filename in all paths and returns a list of
+// existing paths.
+func (s *Scope) findExisting(paths []string, filename string) []string {
+	var sl []string
+
+	for _, p := range paths {
+		f := s.appendPaths(p, filename)
+		_, err := os.Stat(f)
+		if err == nil || os.IsExist(err) {
+			sl = append(sl, f)
+		}
+	}
+
+	return sl
 }

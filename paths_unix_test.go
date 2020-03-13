@@ -106,3 +106,53 @@ func TestPaths(t *testing.T) {
 		}
 	}
 }
+
+func TestConfigLookups(t *testing.T) {
+	tests := []struct {
+		scope      *Scope
+		configFile string
+		result     []string
+	}{
+		{NewScope(System, "ssh"), "sshd_config", []string{"/etc/ssh/sshd_config"}},
+		{NewScope(User, "ssh"), "sshd_config", []string{"/etc/ssh/sshd_config"}},
+	}
+
+	for _, tt := range tests {
+		r, err := tt.scope.LookupConfig(tt.configFile)
+		if err != nil {
+			t.Errorf("Error looking up config: %s", err)
+		}
+		if len(r) != 1 {
+			fmt.Println(r)
+			t.Fatalf("Expected 1 result, got %d results", len(r))
+		}
+		if r[0] != tt.result[0] {
+			t.Errorf("Expected config file: %s - got: %s", tt.result[0], r[0])
+		}
+	}
+}
+
+func TestDataLookups(t *testing.T) {
+	tests := []struct {
+		scope    *Scope
+		dataFile string
+		result   []string
+	}{
+		{NewVendorScope(System, "terminfo", "x"), "xterm+256color", []string{"/usr/share/terminfo/x/xterm+256color"}},
+		{NewVendorScope(User, "terminfo", "x"), "xterm+256color", []string{"/usr/share/terminfo/x/xterm+256color"}},
+	}
+
+	for _, tt := range tests {
+		r, err := tt.scope.LookupDataFile(tt.dataFile)
+		if err != nil {
+			t.Errorf("Error looking up data file: %s", err)
+		}
+		if len(r) != 1 {
+			fmt.Println(r)
+			t.Fatalf("Expected 1 result, got %d results", len(r))
+		}
+		if r[0] != tt.result[0] {
+			t.Errorf("Expected data file: %s - got: %s", tt.result[0], r[0])
+		}
+	}
+}
