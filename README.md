@@ -34,7 +34,7 @@ retrieve user- and/or system-specific base directories and paths:
 scope := gap.NewScope(gap.User, "app")
 ```
 
-### Functions
+### Directories
 
 `DataDirs` retrieves a priority-sorted list of data directories:
 
@@ -76,9 +76,9 @@ dir, err := scope.CacheDir()
 | macOS    | ~/Library/Caches/app     | /Library/Caches/app     |
 | Windows  | %LOCALAPPDATA%/app/Cache | %PROGRAMDATA%/app/Cache |
 
----
+### Default File Paths
 
-`DataPath` retrieves the default path of a writeable file for user-specific data:
+`DataPath` retrieves the default path for a data file:
 
 ```go
 path, err := scope.DataPath("filename")
@@ -92,8 +92,7 @@ path, err := scope.DataPath("filename")
 
 ---
 
-`ConfigPath` retrieves the default path of a writeable config file for
-user-specific data:
+`ConfigPath` retrieves the default path for a config file:
 
 ```go
 path, err := scope.ConfigPath("filename.conf")
@@ -107,7 +106,7 @@ path, err := scope.ConfigPath("filename.conf")
 
 ---
 
-`LogPath` retrieves the default path of a writeable log file:
+`LogPath` retrieves the default path for a log file:
 
 ```go
 path, err := scope.LogPath("filename.log")
@@ -119,7 +118,7 @@ path, err := scope.LogPath("filename.log")
 | macOS    | ~/Library/Logs/app/filename.log      | /Library/Logs/app/filename.log      |
 | Windows  | %LOCALAPPDATA%/app/Logs/filename.log | %PROGRAMDATA%/app/Logs/filename.log |
 
----
+### Lookup Methods
 
 `LookupData` retrieves a priority-sorted list of paths for existing data files
 with the name `filename`:
