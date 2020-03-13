@@ -140,5 +140,4 @@ scope.LookupConfig("filename.conf")
 // Unix: ["/etc/xdg/app/filename.conf", "/etc/app/filename.conf"]
 // macOS: ["/Library/Preferences/app/filename.conf"]
 // Windows: ["%PROGRAMDATA%/app/Config/filename.conf"]
-}
 ```
