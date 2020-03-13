@@ -46,6 +46,8 @@ dirs, err := scope.DataDirs()
 | macOS    | ["~/Library/Application Support/app"]                            | ["/Library/Application Support/app"]       |
 | Windows  | ["%LOCALAPPDATA%/app"]                                           | ["%PROGRAMDATA%/app"]                      |
 
+---
+
 `ConfigDirs` retrieves a priority-sorted list of config directories:
 
 ```go
@@ -57,6 +59,8 @@ dirs, err := scope.ConfigDirs()
 | Unix     | ["~/.config/app", "/etc/xdg/app", "/etc/app"] | ["/etc/xdg/app", "/etc/app"] |
 | macOS    | ["~/Library/Preferences/app"]                 | ["/Library/Preferences/app"] |
 | Windows  | ["%LOCALAPPDATA%/app/Config"]                 | ["%PROGRAMDATA%/app/Config"] |
+
+---
 
 `CacheDir` retrieves the app's cache directory:
 
@@ -70,6 +74,8 @@ dir, err := scope.CacheDir()
 | macOS    | ~/Library/Caches/app     | /Library/Caches/app     |
 | Windows  | %LOCALAPPDATA%/app/Cache | %PROGRAMDATA%/app/Cache |
 
+---
+
 `DataPath` retrieves the default path of a writeable file for user-specific data:
 
 ```go
@@ -81,6 +87,8 @@ path, err := scope.DataPath("filename")
 | Unix     | ~/.local/share/app/filename                | /usr/local/share/app/filename             |
 | macOS    | ~/Library/Application Support/app/filename | /Library/Application Support/app/filename |
 | Windows  | %LOCALAPPDATA%/app/filename                | %PROGRAMDATA%/app/filename                |
+
+---
 
 `ConfigPath` retrieves the default path of a writeable config file for
 user-specific data:
@@ -95,6 +103,8 @@ path, err := scope.ConfigPath("filename.conf")
 | macOS    | ~/Library/Preferences/app/filename.conf | /Library/Preferences/app/filename.conf |
 | Windows  | %LOCALAPPDATA%/app/Config/filename.conf | %PROGRAMDATA%/app/Config/filename.conf |
 
+---
+
 `LogPath` retrieves the default path of a writeable log file:
 
 ```go
@@ -106,6 +116,8 @@ path, err := scope.LogPath("filename.log")
 | Unix     | ~/.local/share/app/filename.log      | /var/log/app/filename.log           |
 | macOS    | ~/Library/Logs/app/filename.log      | /Library/Logs/app/filename.log      |
 | Windows  | %LOCALAPPDATA%/app/Logs/filename.log | %PROGRAMDATA%/app/Logs/filename.log |
+
+---
 
 `LookupData` retrieves a priority-sorted list of paths for existing data files
 with the name `filename`:
@@ -119,6 +131,8 @@ path, err := scope.LookupData("filename")
 | Unix     | ["~/.local/share/app/filename", "/usr/local/share/app/filename", "/usr/share/app/filename"] | ["/usr/local/share/app/filename", "/usr/share/app/filename"] |
 | macOS    | ["~/Library/Application Support/app/filename"]                                              | ["/Library/Application Support/app/filename"]                |
 | Windows  | ["%LOCALAPPDATA%/app/filename"]                                                             | ["%PROGRAMDATA%/app/filename"]                               |
+
+---
 
 `LookupConfig` retrieves a priority-sorted list of paths for existing config
 files with the name `filename.conf`:
