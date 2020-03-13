@@ -19,13 +19,13 @@ To install go-app-paths, simply run:
 
     go get github.com/muesli/go-app-paths
 
-## Example
+## Usage
 
 ```go
 import gap "github.com/muesli/go-app-paths"
 ```
 
-### User Scope
+### Scopes
 
 You can initialize `gap` with either the `gap.User` or `gap.System` scope to
 retrieve user- and/or system-specific base directories and paths:
@@ -33,6 +33,8 @@ retrieve user- and/or system-specific base directories and paths:
 ```go
 scope := gap.NewScope(gap.User, "app")
 ```
+
+### Functions
 
 `DataDirs` retrieves a priority-sorted list of data directories:
 
