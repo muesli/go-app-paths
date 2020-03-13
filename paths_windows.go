@@ -74,14 +74,14 @@ func (s *Scope) dataDir() (string, error) {
 	return filepath.Join(path, s.App), nil
 }
 
-// cacheDir returns the full path to the cache directory.
-func (s *Scope) cacheDir() (string, error) {
+// dataDirs returns a priority-sorted slice of data dirs.
+func (s *Scope) dataDirs() ([]string, error) {
 	p, err := s.dataDir()
 	if err != nil {
-		return p, err
+		return nil, err
 	}
 
-	return filepath.Join(p, "Cache"), nil
+	return []string{p}, nil
 }
 
 // configDir returns the full path to the config dir.
@@ -92,6 +92,26 @@ func (s *Scope) configDir() (string, error) {
 	}
 
 	return filepath.Join(p, "Config"), nil
+}
+
+// configDirs returns a priority-sorted slice of config dirs.
+func (s *Scope) configDirs() ([]string, error) {
+	p, err := s.configDir()
+	if err != nil {
+		return nil, err
+	}
+
+	return []string{p}, nil
+}
+
+// cacheDir returns the full path to the cache directory.
+func (s *Scope) cacheDir() (string, error) {
+	p, err := s.dataDir()
+	if err != nil {
+		return p, err
+	}
+
+	return filepath.Join(p, "Cache"), nil
 }
 
 // logDir returns the full path to the log dir.

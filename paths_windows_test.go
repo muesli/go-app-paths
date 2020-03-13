@@ -14,20 +14,20 @@ func TestPaths(t *testing.T) {
 		configFile string
 		logFile    string
 	}{
-		{NewScope(System, "", "foobar"), "C:\\ProgramData\\foobar", "C:\\ProgramData\\foobar\\Cache", "C:\\ProgramData\\foobar\\Config\\foobar.conf", "C:\\ProgramData\\foobar\\Logs\\foobar.log"},
-		{NewScope(User, "", "foobar"), "C:\\Users\\runneradmin\\AppData\\Local\\foobar", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Cache", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Config\\foobar.conf", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Logs\\foobar.log"},
+		{NewScope(System, "foobar"), "C:\\ProgramData\\foobar", "C:\\ProgramData\\foobar\\Cache", "C:\\ProgramData\\foobar\\Config\\foobar.conf", "C:\\ProgramData\\foobar\\Logs\\foobar.log"},
+		{NewScope(User, "foobar"), "C:\\Users\\runneradmin\\AppData\\Local\\foobar", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Cache", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Config\\foobar.conf", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Logs\\foobar.log"},
 		{NewCustomHomeScope("C:\\tmp", "", "foobar"), "C:\\tmp", "C:\\tmp\\Cache", "C:\\tmp\\Config\\foobar.conf", "C:\\tmp\\Logs\\foobar.log"},
 	}
 	for _, tt := range tests {
-		path, err := tt.scope.DataDir()
+		paths, err := tt.scope.DataDirs()
 		if err != nil {
 			t.Errorf("Error retrieving data dir: %s", err)
 		}
-		if path != expandUser(tt.dataDir) {
-			t.Errorf("Expected data dir: %s - got: %s", tt.dataDir, path)
+		if paths[0] != expandUser(tt.dataDir) {
+			t.Errorf("Expected data dir: %s - got: %s", tt.dataDir, paths[0])
 		}
 
-		path, err = tt.scope.CacheDir()
+		path, err := tt.scope.CacheDir()
 		if err != nil {
 			t.Errorf("Error retrieving cache dir: %s", err)
 		}

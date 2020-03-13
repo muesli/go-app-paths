@@ -64,14 +64,33 @@ func NewCustomHomeScope(path, vendor, app string) *Scope {
 	}
 }
 
-// DataDir returns the full path to the application's data dir.
-func (s *Scope) DataDir() (string, error) {
-	p, err := s.dataDir()
+// DataDirs returns a priority-sorted slice of all the application's data dirs.
+func (s *Scope) DataDirs() ([]string, error) {
+	ps, err := s.dataDirs()
 	if err != nil {
-		return p, err
+		return nil, err
 	}
 
-	return s.appendPaths(p), nil
+	var sl []string
+	for _, v := range ps {
+		sl = append(sl, s.appendPaths(v))
+	}
+	return sl, nil
+}
+
+// ConfigDirs returns a priority-sorted slice of all of the application's config
+// dirs.
+func (s *Scope) ConfigDirs() ([]string, error) {
+	ps, err := s.configDirs()
+	if err != nil {
+		return nil, err
+	}
+
+	var sl []string
+	for _, v := range ps {
+		sl = append(sl, s.appendPaths(v))
+	}
+	return sl, nil
 }
 
 // CacheDir returns the full path to the application's cache dir.
