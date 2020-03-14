@@ -14,6 +14,7 @@ func TestPaths(t *testing.T) {
 		configDirs []string
 		cacheDir   string
 		configFile string
+		dataFile   string
 		logFile    string
 	}{
 		{
@@ -22,6 +23,7 @@ func TestPaths(t *testing.T) {
 			configDirs: []string{"/etc/xdg/foobar", "/etc/foobar"},
 			cacheDir:   "/var/cache/foobar",
 			configFile: "/etc/xdg/foobar/foobar.conf",
+			dataFile:   "/usr/local/share/foobar/foobar.data",
 			logFile:    "/var/log/foobar/foobar.log",
 		},
 		{
@@ -30,6 +32,7 @@ func TestPaths(t *testing.T) {
 			configDirs: []string{"/etc/xdg/barcorp/foobar", "/etc/barcorp/foobar"},
 			cacheDir:   "/var/cache/barcorp/foobar",
 			configFile: "/etc/xdg/barcorp/foobar/foobar.conf",
+			dataFile:   "/usr/local/share/barcorp/foobar/foobar.data",
 			logFile:    "/var/log/barcorp/foobar/foobar.log",
 		},
 		{
@@ -38,6 +41,7 @@ func TestPaths(t *testing.T) {
 			configDirs: []string{"~/.config/foobar", "/etc/xdg/foobar", "/etc/foobar"},
 			cacheDir:   "~/.cache/foobar",
 			configFile: "~/.config/foobar/foobar.conf",
+			dataFile:   "/home/muesli/.local/share/foobar/foobar.data",
 			logFile:    "~/.local/share/foobar/foobar.log",
 		},
 		{
@@ -46,6 +50,7 @@ func TestPaths(t *testing.T) {
 			configDirs: []string{"/tmp/.config/foobar"},
 			cacheDir:   "/tmp/.cache/foobar",
 			configFile: "/tmp/.config/foobar/foobar.conf",
+			dataFile:   "/tmp/.local/share/foobar/foobar.data",
 			logFile:    "/tmp/.local/share/foobar/foobar.log",
 		},
 	}
@@ -95,6 +100,14 @@ func TestPaths(t *testing.T) {
 		}
 		if path != expandUser(tt.configFile) {
 			t.Errorf("Expected config path: %s - got: %s", tt.configFile, path)
+		}
+
+		path, err = tt.scope.DataPath(tt.scope.App + ".data")
+		if err != nil {
+			t.Errorf("Error retrieving data path: %s", err)
+		}
+		if path != expandUser(tt.dataFile) {
+			t.Errorf("Expected data path: %s - got: %s", tt.dataFile, path)
 		}
 
 		path, err = tt.scope.LogPath(tt.scope.App + ".log")
