@@ -12,12 +12,43 @@ func TestPaths(t *testing.T) {
 		dataDir    string
 		cacheDir   string
 		configFile string
+		dataFile   string
 		logFile    string
 	}{
-		{NewScope(System, "foobar"), "C:\\ProgramData\\foobar", "C:\\ProgramData\\foobar\\Cache", "C:\\ProgramData\\foobar\\Config\\foobar.conf", "C:\\ProgramData\\foobar\\Logs\\foobar.log"},
-		{NewScope(User, "foobar"), "C:\\Users\\runneradmin\\AppData\\Local\\foobar", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Cache", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Config\\foobar.conf", "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Logs\\foobar.log"},
-		{NewCustomHomeScope("C:\\tmp", "", "foobar"), "C:\\tmp", "C:\\tmp\\Cache", "C:\\tmp\\Config\\foobar.conf", "C:\\tmp\\Logs\\foobar.log"},
+		{
+			scope:      NewScope(System, "foobar"),
+			dataDir:    "C:\\ProgramData\\foobar",
+			cacheDir:   "C:\\ProgramData\\foobar\\Cache",
+			configFile: "C:\\ProgramData\\foobar\\Config\\foobar.conf",
+			dataFile:   "C:\\ProgramData\\foobar\\foobar.data",
+			logFile:    "C:\\ProgramData\\foobar\\Logs\\foobar.log",
+		},
+		{
+			scope:      NewVendorScope(System, "barcorp", "foobar"),
+			dataDir:    "C:\\ProgramData\\barcorp\\foobar",
+			cacheDir:   "C:\\ProgramData\\barcorp\\foobar\\Cache",
+			configFile: "C:\\ProgramData\\barcorp\\foobar\\Config\\foobar.conf",
+			dataFile:   "C:\\ProgramData\\barcorp\\foobar\\foobar.data",
+			logFile:    "C:\\ProgramData\\barcorp\\foobar\\Logs\\foobar.log",
+		},
+		{
+			scope:      NewScope(User, "foobar"),
+			dataDir:    "C:\\Users\\runneradmin\\AppData\\Local\\foobar",
+			cacheDir:   "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Cache",
+			configFile: "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Config\\foobar.conf",
+			dataFile:   "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\foobar.data",
+			logFile:    "C:\\Users\\runneradmin\\AppData\\Local\\foobar\\Logs\\foobar.log",
+		},
+		{
+			scope:      NewCustomHomeScope("C:\\tmp", "", "foobar"),
+			dataDir:    "C:\\tmp",
+			cacheDir:   "C:\\tmp\\Cache",
+			configFile: "C:\\tmp\\Config\\foobar.conf",
+			dataFile:   "C:\\tmp\\foobar.data",
+			logFile:    "C:\\tmp\\Logs\\foobar.log",
+		},
 	}
+
 	for _, tt := range tests {
 		paths, err := tt.scope.DataDirs()
 		if err != nil {
@@ -41,6 +72,14 @@ func TestPaths(t *testing.T) {
 		}
 		if path != expandUser(tt.configFile) {
 			t.Errorf("Expected config path: %s - got: %s", tt.configFile, path)
+		}
+
+		path, err = tt.scope.DataPath(tt.scope.App + ".data")
+		if err != nil {
+			t.Errorf("Error retrieving data path: %s", err)
+		}
+		if path != expandUser(tt.dataFile) {
+			t.Errorf("Expected data path: %s - got: %s", tt.dataFile, path)
 		}
 
 		path, err = tt.scope.LogPath(tt.scope.App + ".log")
