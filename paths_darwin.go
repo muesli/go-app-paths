@@ -15,7 +15,7 @@ var (
 
 // appendPaths appends the app-name and further variadic parts to a path
 func (s *Scope) appendPaths(path string, parts ...string) string {
-	paths := []string{path, s.App}
+	paths := []string{path, s.Vendor, s.App}
 	paths = append(paths, parts...)
 	return filepath.Join(paths...)
 }
