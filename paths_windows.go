@@ -71,7 +71,7 @@ func (s *Scope) dataDir() (string, error) {
 		return "", ErrRetrievingPath
 	}
 
-	return filepath.Join(path, s.App), nil
+	return filepath.Join(path, s.Vendor, s.App), nil
 }
 
 // dataDirs returns a priority-sorted slice of data dirs.
