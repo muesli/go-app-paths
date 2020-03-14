@@ -41,7 +41,7 @@ func TestPaths(t *testing.T) {
 			configDirs: []string{"~/.config/foobar", "/etc/xdg/foobar", "/etc/foobar"},
 			cacheDir:   "~/.cache/foobar",
 			configFile: "~/.config/foobar/foobar.conf",
-			dataFile:   "/home/muesli/.local/share/foobar/foobar.data",
+			dataFile:   "~/.local/share/foobar/foobar.data",
 			logFile:    "~/.local/share/foobar/foobar.log",
 		},
 		{
