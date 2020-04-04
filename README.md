@@ -34,6 +34,15 @@ retrieve user- and/or system-specific base directories and paths:
 scope := gap.NewScope(gap.User, "app")
 ```
 
+Alternatively, you can initialize `gap` with an additional vendor name:
+
+```go
+scope := gap.NewVendorScope(gap.User, "vendor", "app")
+```
+
+This will cause the `app` directory to be prefixed by a `vendor` directory in
+all the following tables.
+
 ### Directories
 
 `DataDirs` retrieves a priority-sorted list of data directories:
