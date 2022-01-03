@@ -4,7 +4,7 @@
 [![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://pkg.go.dev/github.com/muesli/go-app-paths?tab=doc)
 [![Build Status](https://github.com/muesli/go-app-paths/workflows/build/badge.svg)](https://github.com/muesli/go-app-paths/actions)
 [![Coverage Status](https://coveralls.io/repos/github/muesli/go-app-paths/badge.svg?branch=master)](https://coveralls.io/github/muesli/go-app-paths?branch=master)
-[![Go ReportCard](http://goreportcard.com/badge/muesli/go-app-paths)](http://goreportcard.com/report/muesli/go-app-paths)
+[![Go ReportCard](https://goreportcard.com/badge/muesli/go-app-paths)](https://goreportcard.com/report/muesli/go-app-paths)
 
 Lets you retrieve platform-specific paths (like directories for app-data, cache,
 config, and logs). It is fully compliant with the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
@@ -13,7 +13,7 @@ on Unix, but also provides implementations for macOS and Windows systems.
 ## Installation
 
 Make sure you have a working Go environment (Go 1.2 or higher is required).
-See the [install instructions](http://golang.org/doc/install.html).
+See the [install instructions](https://golang.org/doc/install.html).
 
 To install go-app-paths, simply run:
 
