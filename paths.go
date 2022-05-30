@@ -4,8 +4,6 @@ import (
 	"errors"
 	"os"
 	"strings"
-
-	homedir "github.com/mitchellh/go-homedir"
 )
 
 var (
@@ -159,7 +157,7 @@ func (s *Scope) LookupDataFile(filename string) ([]string, error) {
 // expandUser is a helper function that expands the first '~' it finds in the
 // passed path with the home directory of the current user.
 func expandUser(path string) string {
-	if u, err := homedir.Dir(); err == nil {
+	if u, err := os.UserHomeDir(); err == nil {
 		return strings.Replace(path, "~", u, -1)
 	}
 	return path
